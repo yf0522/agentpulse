@@ -20,6 +20,23 @@ case "$OS-$ARCH" in
 esac
 
 URL="https://github.com/$REPO/releases/latest/download/$ASSET"
+
+# Check the binary exists for this platform before downloading.
+if ! curl -fsI -o /dev/null "$URL"; then
+  cat >&2 <<EOF
+This platform ($OS-$ARCH) does not yet have a prebuilt binary in the latest release.
+
+Build from source instead — it takes ~30 seconds with Bun installed:
+
+  git clone https://github.com/$REPO && cd agentpulse
+  bun install && bun run compile
+  mv dist/agentpulse $BIN_DIR/agentpulse
+
+Or install Bun first:  https://bun.sh
+EOF
+  exit 1
+fi
+
 TMP="$(mktemp)"
 echo "downloading $ASSET..."
 curl -fsSL -o "$TMP" "$URL"
