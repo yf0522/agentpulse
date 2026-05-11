@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>agentpulse</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+    <script src="/app.js" type="module" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <span class="logo">●</span>
+        <span class="name">agentpulse</span>
+        <span class="tagline">AI coding agent observability</span>
+      </div>
+      <div class="totals" id="totals">
+        <span class="loading">loading…</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="grid">
+        <div class="card big">
+          <div class="card-head">
+            <h2>Cost over time</h2>
+            <div class="range" id="range">
+              <button data-days="7">7d</button>
+              <button data-days="14" class="active">14d</button>
+              <button data-days="30">30d</button>
+            </div>
+          </div>
+          <canvas id="cost-chart" height="120"></canvas>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2>Token mix (recent)</h2>
+          </div>
+          <canvas id="token-mix" height="160"></canvas>
+        </div>
+      </section>
+
+      <section class="card sessions-card">
+        <div class="card-head">
+          <h2>Sessions</h2>
+          <span class="hint">click a row for full event timeline</span>
+        </div>
+        <table id="sessions">
+          <thead>
+            <tr>
+              <th>session</th>
+              <th>agent</th>
+              <th>model</th>
+              <th>cwd</th>
+              <th class="num">cost</th>
+              <th class="num">tokens</th>
+              <th>context</th>
+              <th>last seen</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="card detail" id="detail" hidden>
+        <div class="card-head">
+          <h2 id="detail-title">Session</h2>
+          <button id="detail-close">close</button>
+        </div>
+        <canvas id="detail-chart" height="100"></canvas>
+        <div class="event-list" id="detail-events"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span>data dir: <code>~/.agentpulse</code></span>
+      <span>local-only · nothing leaves your machine</span>
+    </footer>
+  </body>
+</html>

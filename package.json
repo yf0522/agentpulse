@@ -1,0 +1,30 @@
+{
+  "name": "agentpulse",
+  "version": "0.0.1",
+  "description": "TUI + Web dashboard for Claude Code / Codex / Cursor agents — token, cost, context, rate limit observability.",
+  "type": "module",
+  "bin": {
+    "agentpulse": "./dist/cli.js"
+  },
+  "scripts": {
+    "dev:tui": "bun run src/cli.ts tui",
+    "dev:web": "bun run src/cli.ts web",
+    "dev:hook": "bun run src/cli.ts hook",
+    "build": "bun build src/cli.ts --target=bun --outfile=dist/cli.js",
+    "compile": "bun build src/cli.ts --compile --minify --sourcemap=none --outfile=dist/agentpulse",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ink": "^5.0.1",
+    "react": "^18.3.1",
+    "react-devtools-core": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^18.3.12",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "bun": ">=1.1.0"
+  }
+}
